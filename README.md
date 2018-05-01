@@ -1,2 +1,5 @@
-# emobileScript
-web3 for emobile project
+# Botscript 
+
+## Setting testing account
+In `/data/config.js`
+setting your account address and privateKey.
