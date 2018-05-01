@@ -1,4 +1,4 @@
-# Botscript 
+# Emobile Project Contract Script 
 
 ## Setting testing account
 In `/data/config.js`
