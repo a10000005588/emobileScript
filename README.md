@@ -38,6 +38,8 @@ GET:  /emobile                                  // 列出所有 emobile 資訊
 GET:  /emobile/:hash                            // 以 hash 取得 emobile 資訊
 GET:  /emobile/investor/:investorId             // 取得investor對所有emobile的投資
 POST: /emobile/:EmobileId/investor/:investorId  // 新增一筆investor對emobile的投資資訊
+POST: /emobile/:EmobileId/client/:clientId      // 新增一筆client對emobile的投資資訊
+
 ```
 
 ### Driver API
@@ -56,7 +58,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 # # Emobile API
 
-## 列出所有 emobile 資訊.
+## # 列出所有 emobile 資訊.
 
 **URL** : `/emobile`
 
@@ -151,7 +153,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 ```
 ---
 
-## 以 hash 取得 emobile 資訊.
+## # 以 hash 取得 emobile 資訊.
 
 **URL** : `/emobile/:hash`
 
@@ -239,7 +241,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```
 ---
-## 取得investor對所有emobile的投資.
+## # 取得investor對所有emobile的投資.
 
 **URL** : `/emobile/investor/:investorId`
 
@@ -418,10 +420,93 @@ POST: /driver/:hash/assess      // 給予driver評價
 }
 
 ```
+---
+
+## # 新增一筆client對emobile的投資資訊
+
+**URL** : `/emobile/:EmobileId/client/:clientId`
+
+**Method** : `POST`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**URL constraints**
+
+```
+ "EmobileId": byte64
+ "clientId": byte64
+```
+
+**URL example**:
+
+```
+/emobile/0x5a25d727235d5641de8be96bb7447d4b839e771f/client/0x83af6976832d90e5693a9b5a7b29fac4a28de801
+```
+
+**Data constraints**
+
+```json
+{
+    "paymentAmount": "ether",
+}
+```
+**Data example**: 
+
+```json
+{
+    "paymentAmount": 0.001,
+}
+```
+
+### Success Response
+
+**Condition** : If everything is OK and server available.
+
+**Content example**
+
+```json
+{
+    "result": true,
+    "message": "payment success",
+}
+```
+
+### Error Responses
+
+**Condition** : If fields has wrong format or miss fields.
+
+**Content example** :
+
+```json
+
+{
+    "result": false,
+    "message": "",
+}
+
+```
+
+### Or
+
+**Condition** : If server unavailable.
+
+**Code** : `500 Internal Server Error`
+
+**Content example**
+
+```json
+
+{
+    "errors": "Internal Server Error."
+}
+
+```
 
 # # Driver API
 
-## 列出所有司機資訊.
+## # 列出所有司機資訊.
 
 **URL** : `/driver`
 
@@ -501,8 +586,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```
 ---
-
-## 列出該hash的司機資訊.
+## # 列出該hash的司機資訊.
 
 
 **URL** : `/driver/:hash`
@@ -581,7 +665,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 ```
 
 ---
-## 給予司機評價.
+## # 給予司機評價.
 
 **URL** : `/driver/:hash/assess`
 
@@ -659,7 +743,3 @@ POST: /driver/:hash/assess      // 給予driver評價
 }
 
 ```
-
-
-
-
