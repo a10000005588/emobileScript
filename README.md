@@ -30,7 +30,7 @@ It's API spec for emobile web app.
 
 data collection for emobiles.
 
-[link](#-emobile)
+[link](#-Emobile-API)
 * [ ] GET: /
 
 ```
@@ -44,7 +44,7 @@ GET:  /emobile/investor/:investorId             // 取得investor對所有emobil
 
 data collection for emobiles.
 
-[link](#-Driver)
+[link](#-Driver-API)
 * [ ] GET: /
 
 ```
