@@ -34,18 +34,27 @@ data collection for emobiles.
 * [ ] GET: /
 
 ```
-GET:  /emobile                // 列出所有 emobile 資訊
-GET:  /emobile/:hash          // 以 hash 取得 emobile 資訊
-GET:  /emobile/investor/:investorId // 取得investor對所有emobile的投資
-POST: /emobile/:EmobileId/investor/:investorId // 新增一筆investor對emobile的投資資訊
+GET:  /emobile                                  // 列出所有 emobile 資訊
+GET:  /emobile/:hash                            // 以 hash 取得 emobile 資訊
+GET:  /emobile/investor/:investorId             // 取得investor對所有emobile的投資
+POST: /emobile/:EmobileId/investor/:investorId  // 新增一筆investor對emobile的投資資訊
+```
 
-GET:  /driver        // 列出所有driver資訊
-GET:  /driver/:hash  // 列出對應hash的driver資訊
-POST: /driver/:hash/assess // 給予driver評價
+### Driver API
+
+data collection for emobiles.
+
+[link](#-Driver)
+* [ ] GET: /
+
+```
+GET:  /driver                   // 列出所有driver資訊
+GET:  /driver/:hash             // 列出對應hash的driver資訊
+POST: /driver/:hash/assess      // 給予driver評價
 ```
 
 
-# # Emobile
+# # Emobile API
 
 ## 列出所有 emobile 資訊.
 
@@ -410,6 +419,7 @@ POST: /driver/:hash/assess // 給予driver評價
 
 ```
 
+# # Driver API
 
 ## 列出所有司機資訊.
 
