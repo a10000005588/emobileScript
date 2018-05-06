@@ -14,13 +14,13 @@ setting your account address 、privateKey、 contracts address..
 4. Then, in the emobileScript, run script with...
 `./node_modules/.bin/babel-node test.js`
 
-## Emobile script API
+## Project API
 
 Provide the API for emobile frontend:
 https://xd.adobe.com/spec/e801fb67-7a04-4539-9ddf-a9d57bafcd04/#screen/9cee957f-3e26-4721-8b4b-84d7c96ba46d/%E6%88%91%E7%9A%84%E9%92%B1%E5%8C%85
 
 
-## API Spec for emobile app.
+###  API Spec for emobile App.
 
 It's API spec for emobile web app.
 
@@ -30,7 +30,7 @@ It's API spec for emobile web app.
 
 data collection for emobiles.
 
-[link](#-Emobile-API)
+[link](#-Emobile)
 * [ ] GET: /
 
 ```
@@ -44,7 +44,7 @@ GET:  /emobile/investor/:investorId             // 取得investor對所有emobil
 
 data collection for emobiles.
 
-[link](#-Driver-API)
+[link](#-Driver)
 * [ ] GET: /
 
 ```
@@ -52,7 +52,7 @@ GET:  /driver                   // 列出所有driver資訊
 GET:  /driver/:hash             // 列出對應hash的driver資訊
 POST: /driver/:hash/assess      // 給予driver評價
 ```
-
+---
 
 # # Emobile API
 
@@ -149,7 +149,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 }
 
 ```
-
+---
 
 ## 以 hash 取得 emobile 資訊.
 
@@ -238,7 +238,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 }
 
 ```
-
+---
 ## 取得investor對所有emobile的投資.
 
 **URL** : `/emobile/investor/:investorId`
@@ -333,7 +333,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 }
 
 ```
-
+---
 
 ## 新增一筆investor對emobile的投資資訊
 
@@ -500,10 +500,87 @@ POST: /driver/:hash/assess      // 給予driver評價
 }
 
 ```
-
+---
 
 ## 列出該hash的司機資訊.
 
+
+**URL** : `/driver/:hash`
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+**URL constraints**
+```
+{
+  "hash": bytes64
+}
+```
+**URL example**:
+
+```
+/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81
+```
+
+**Data constraints**
+
+(None)
+
+**Data example**: 
+
+(None)
+
+### Success Response
+
+**Condition** : If everything is OK and server available.
+
+**Content example**
+
+```json
+{
+  "driverName": "毛小聖",
+  "creadit": 5,
+  "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
+  "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
+
+}
+```
+
+### Error Responses
+
+**Condition** : If fields has wrong format or miss fields.
+
+**Content example** :
+
+```json
+
+{
+    "result": false,
+    "message": "",
+}
+
+```
+
+### Or
+
+**Condition** : If server unavailable.
+
+**Code** : `500 Internal Server Error`
+
+**Content example**
+
+```json
+
+{
+    "errors": "Internal Server Error."
+}
+
+```
+
+---
 ## 給予司機評價.
 
 **URL** : `/driver/:hash/assess`
