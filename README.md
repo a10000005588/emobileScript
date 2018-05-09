@@ -669,7 +669,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 **URL** : `/driver/:hash/assess`
 
-**Method** : `GET`
+**Method** : `POST`
 
 **Auth required** : NO
 
