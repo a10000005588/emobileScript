@@ -1,8 +1,7 @@
 /* set the default accounts */
 module.exports = {
-    account: '0xb134c4a49eb0fd25e94fb47849a23e61bbac8c3e',
-    myPrivateKey: 'def3efbe410982a9860cead4e7e59b04ed88fa61cc8cc39cce568fb861dd203c',
-    transactionTimeInterval: 5000,
+    account: '0x4e88d34506babea49d4bfd746afc3fd48ea0e299',
+    myPrivateKey: 'e60ec8941e7a14bb8cf250248b2dda9d75100e065d83cbe4703cc8080a6afe0e',
 }
 
 
