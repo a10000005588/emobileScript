@@ -37,7 +37,7 @@ data collection for emobiles.
 GET:  /emobile                                  // 列出所有 emobile 資訊
 GET:  /emobile/:hash                            // 以 hash 取得 emobile 資訊
 GET:  /emobile/investor/:investorId             // 取得investor對所有emobile的投資
-POST: /emobile/:EmobileId/investor/:investorId  // 新增一筆investor對emobile的投資資訊
+POST: /emobile/:EmobileId/investor/:investorId  // 新增一筆investor對emobile的投資資訊
 POST: /emobile/:EmobileId/client/:clientId      // 新增一筆client對emobile的投資資訊
 
 ```
@@ -90,6 +90,7 @@ POST: /driver/:hash/assess      // 給予driver評價
     "driverName": "王小明",
     "driverAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "isLock": false,
+ ** "mileage": 20  (km)
     "createDate": "2018-01-01",
     "investorList": [{
       "investorName": "王二明",
@@ -107,6 +108,7 @@ POST: /driver/:hash/assess      // 給予driver評價
     "driverName": "汪大東",
     "driverAddress": "0x65d09d72e2ca19b7fad0a5d6cec6909e3b379214",
     "isLock": false,
+ ** "mileage": 20  (km)
     "createDate": "2018-01-01",
     "investorList": [{
       "investorName": "王二明",
@@ -197,6 +199,7 @@ POST: /driver/:hash/assess      // 給予driver評價
     "driverName": "王小明",
     "driverAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "isLock": false,
+ ** "mileage": 20  (km)
     "createDate": "2018-01-01",
     "investorList": [{
       "investorName": "王二明",
@@ -290,6 +293,7 @@ POST: /driver/:hash/assess      // 給予driver評價
     "investAmount": 5000000000000000000,
     "isLock": false,
     "createDate": "2018-01-01"
+ ** "mileage": 20  (km)
 }, {
     "mobileAddress": "0xe635dead34fdd0c8c1eaa621647084732b4b23db",
     "plate": "BBS-9999",
@@ -301,6 +305,7 @@ POST: /driver/:hash/assess      // 給予driver評價
     "investAmount": 5000000000000000000,
     "isLock": false,
     "createDate": "2018-01-01"
+ ** "mileage": 20  (km)
 },...
 ]
 ```
@@ -669,7 +674,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 **URL** : `/driver/:hash/assess`
 
-**Method** : `GET`
+**Method** : `POST`
 
 **Auth required** : NO
 
