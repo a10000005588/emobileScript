@@ -49,7 +49,7 @@ web3.setProvider(new web3.providers.HttpProvider(ethereumUri));
 
 if(!web3.isConnected()) {
     throw new Error('unable to connect to ethereum node at ' + ethereumUri);
-}else {
+} else {
     console.log('connected successed');
     console.log('connected to ethereum node at ' + ethereumUri);
 }
