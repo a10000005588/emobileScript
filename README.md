@@ -14,15 +14,20 @@ setting your account address 、privateKey、 contracts address..
 4. Then, in the emobileScript, run script with...
 `./node_modules/.bin/babel-node test.js`
 
-## Project API
+## Project API Information
 
-Provide the API for emobile frontend:
+### Provide the API for emobile frontend:
 https://xd.adobe.com/spec/e801fb67-7a04-4539-9ddf-a9d57bafcd04/#screen/9cee957f-3e26-4721-8b4b-84d7c96ba46d/%E6%88%91%E7%9A%84%E9%92%B1%E5%8C%85
 
 
 ###  API Spec for emobile App.
 
 It's API spec for emobile web app.
+
+### Base URL: 
+
+140.113.73.50:3000
+
 
 ## Usage
 ---
@@ -34,12 +39,9 @@ data collection for emobiles.
 * [ ] GET: /
 
 ```
-GET:  /emobile                                  // 列出所有 emobile 資訊
-GET:  /emobile/:hash                            // 以 hash 取得 emobile 資訊
-GET:  /emobile/investor/:investorId             // 取得investor對所有emobile的投資
-POST: /emobile/:EmobileId/investor/:investorId  // 新增一筆investor對emobile的投資資訊
-POST: /emobile/:EmobileId/client/:clientId      // 新增一筆client對emobile的投資資訊
-
+GET:  /api/emoto                                  // 列出所有 emoto 資訊
+GET:  /api/emoto/:hash                            // 以 hash 取得 emoto 資訊
+GET:  /api/emoto/:hash/user/:userHash             // 計算某台電動車行駛費用
 ```
 
 ### Driver API
@@ -50,17 +52,17 @@ data collection for emobiles.
 * [ ] GET: /
 
 ```
-GET:  /driver                   // 列出所有driver資訊
-GET:  /driver/:hash             // 列出對應hash的driver資訊
-POST: /driver/:hash/assess      // 給予driver評價
+GET:  /api/driver                   // 列出所有driver資訊
+GET:  /api/driver/:hash             // 列出對應hash的driver資訊
+POST: /api/driver/:hash/credit      // 給予driver評價
 ```
 ---
 
 # # Emobile API
 
-## # 列出所有 emobile 資訊.
+## # 列出所有 emoto 資訊.
 
-**URL** : `/emobile`
+**URL** : `/api/emoto`
 
 **Method** : `GET`
 
@@ -84,41 +86,23 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```json
 [{
-    "mobileAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
+    "method": "getAllEmotoInformation",
+    "emotoAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "plate": "ACX-9999",
-    "fund": 5000000000000000000,
     "driverName": "王小明",
     "driverAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "isLock": false,
- ** "mileage": 20  (km)
+ ** "mileage": 20  (km),
     "createDate": "2018-01-01",
-    "investorList": [{
-      "investorName": "王二明",
-      "ratio": 0.1,
-      "investAmount": 5000000000000000000
-    },{
-      "investorName": "王三明",
-      "ratio": 0.1,
-      "investAmount": 5000000000000000000
-    }]
-}, {
-    "mobileAddress": "0xe635dead34fdd0c8c1eaa621647084732b4b23db",
+]}, {
+    "method": "getAllEmotoInformation",
+    "emotoAddress": "0xe635dead34fdd0c8c1eaa621647084732b4b23db",
     "plate": "BBS-9999",
-    "fund": 5000000000000000000,
     "driverName": "汪大東",
     "driverAddress": "0x65d09d72e2ca19b7fad0a5d6cec6909e3b379214",
     "isLock": false,
- ** "mileage": 20  (km)
+ ** "mileage": 39  (km),
     "createDate": "2018-01-01",
-    "investorList": [{
-      "investorName": "王二明",
-      "ratio": 0.1,
-      "investAmount": 5000000000000000000
-    },{
-      "investorName": "王三明",
-      "ratio": 0.1,
-      "investAmount": 5000000000000000000
-    }]
 },...
 ]
 ```
@@ -154,10 +138,9 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```
 ---
-
 ## # 以 hash 取得 emobile 資訊.
 
-**URL** : `/emobile/:hash`
+**URL** : `/api/emoto/:hash`
 
 **Method** : `GET`
 
@@ -174,7 +157,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 **URL example**:
 
 ```
-/emobile/0x83af6976832d90e5693a9b5a7b29fac4a28de801
+/api/emoto/0x83af6976832d90e5693a9b5a7b29fac4a28de801
 ```
 
 **Data constraints**
@@ -193,23 +176,14 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```json
 {
-    "mobileAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
+    "method": "getEmotoInformation",
+    "emotoAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "plate": "ACX-9999",
-    "fund": 5000000000000000000,
     "driverName": "王小明",
     "driverAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "isLock": false,
- ** "mileage": 20  (km)
+ ** "mileage": 20  (km),
     "createDate": "2018-01-01",
-    "investorList": [{
-      "investorName": "王二明",
-      "ratio": 0.1,
-      "investAmount": 5000000000000000000
-    },{
-      "investorName": "王三明",
-      "ratio": 0.1,
-      "investAmount": 5000000000000000000
-    }]
 }
 ```
 
@@ -244,9 +218,9 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```
 ---
-## # 取得investor對所有emobile的投資.
+## # 計算某台電動車行駛費用
 
-**URL** : `/emobile/investor/:investorId`
+**URL** : `/api/emoto/:hash/user/:userHash`
 
 **Method** : `GET`
 
@@ -257,22 +231,29 @@ POST: /driver/:hash/assess      // 給予driver評價
 **URL constraints**
 
 ```
- "investorId": byte64
+ "hash": byte64
 ```
 
 **URL example**:
 
 ```
-/emobile/investor/0x83af6976832d90e5693a9b5a7b29fac4a28de801
+/api/emoto/0x83af6976832d90e5693a9b5a7b29fac4a28de801/user/0x77af5576832d90e5693a9b5a7b29fac4a28de111
 ```
+
 **Data constraints**
 
-(None)
+```json
+{
+    "createDate": "2018-01-01",
+    "longitude": 121.525, //經度
+    "latitude": 25.0392, //緯度
+    "distance": 1.234, //本次搭乘里程數
+}
+```
 
 **Data example**: 
 
 (None)
-
 
 ### Success Response
 
@@ -281,34 +262,17 @@ POST: /driver/:hash/assess      // 給予driver評價
 **Content example**
 
 ```json
-[{
-    "mobileAddress": "0x10af6976832d90e5693a9b5a7b29fac4a28de801",
+{
+    "method": "calcuateServiceFee",
+    "emotoAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "plate": "ACX-9999",
-    "fund": 5000000000000000000,
     "driverName": "王小明",
-    "driverAddress": "0x99af6976832d90e5693a9b5a7b29fac4a28de801",
-    "investorAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
-    "profit": 34.6,
-    "ratio": 0.1,
-    "investAmount": 5000000000000000000,
-    "isLock": false,
-    "createDate": "2018-01-01"
- ** "mileage": 20  (km)
-}, {
-    "mobileAddress": "0xe635dead34fdd0c8c1eaa621647084732b4b23db",
-    "plate": "BBS-9999",
-    "driverName": "汪大東",
-    "driverAddress": "0x65d09d72e2ca19b7fad0a5d6cec6909e3b379214",
-    "investorAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
-    "profit": 14.3,
-    "ratio": 0.1,
-    "investAmount": 5000000000000000000,
-    "isLock": false,
-    "createDate": "2018-01-01"
- ** "mileage": 20  (km)
-},...
-]
+    "driverAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
+ ** "mileage": 21.234  (km),
+    "fee": 10 (ether)
+}
 ```
+
 
 ### Error Responses
 
@@ -342,178 +306,12 @@ POST: /driver/:hash/assess      // 給予driver評價
 ```
 ---
 
-## 新增一筆investor對emobile的投資資訊
-
-**URL** : `/emobile/:EmobileId/investor/:investorId`
-
-**Method** : `POST`
-
-**Auth required** : NO
-
-**Permissions required** : None
-
-**URL constraints**
-
-```
- "EmobileId": byte64
- "investorId": byte64
-```
-
-**URL example**:
-
-```
-/emobile/0x5a25d727235d5641de8be96bb7447d4b839e771f/investor/0x83af6976832d90e5693a9b5a7b29fac4a28de801
-```
-
-**Data constraints**
-
-```json
-{
-    "investorName": "string",
-    "investAmount": "ether",
-}
-```
-**Data example**: 
-
-```json
-{
-    "investorName": "毛小聖",
-    "investAmount": 0.01,
-}
-```
-
-### Success Response
-
-**Condition** : If everything is OK and server available.
-
-**Content example**
-
-```json
-{
-    "result": true,
-    "message": "invest success",
-}
-```
-
-### Error Responses
-
-**Condition** : If fields has wrong format or miss fields.
-
-**Content example** :
-
-```json
-
-{
-    "result": false,
-    "message": "",
-}
-
-```
-
-### Or
-
-**Condition** : If server unavailable.
-
-**Code** : `500 Internal Server Error`
-
-**Content example**
-
-```json
-
-{
-    "errors": "Internal Server Error."
-}
-
-```
----
-
-## # 新增一筆client對emobile的投資資訊
-
-**URL** : `/emobile/:EmobileId/client/:clientId`
-
-**Method** : `POST`
-
-**Auth required** : NO
-
-**Permissions required** : None
-
-**URL constraints**
-
-```
- "EmobileId": byte64
- "clientId": byte64
-```
-
-**URL example**:
-
-```
-/emobile/0x5a25d727235d5641de8be96bb7447d4b839e771f/client/0x83af6976832d90e5693a9b5a7b29fac4a28de801
-```
-
-**Data constraints**
-
-```json
-{
-    "paymentAmount": "ether",
-}
-```
-**Data example**: 
-
-```json
-{
-    "paymentAmount": 0.001,
-}
-```
-
-### Success Response
-
-**Condition** : If everything is OK and server available.
-
-**Content example**
-
-```json
-{
-    "result": true,
-    "message": "payment success",
-}
-```
-
-### Error Responses
-
-**Condition** : If fields has wrong format or miss fields.
-
-**Content example** :
-
-```json
-
-{
-    "result": false,
-    "message": "",
-}
-
-```
-
-### Or
-
-**Condition** : If server unavailable.
-
-**Code** : `500 Internal Server Error`
-
-**Content example**
-
-```json
-
-{
-    "errors": "Internal Server Error."
-}
-
-```
 
 # # Driver API
 
 ## # 列出所有司機資訊.
 
-**URL** : `/driver`
+**URL** : `/api/driver`
 
 **Method** : `GET`
 
@@ -528,7 +326,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 **URL example**:
 
 ```
-/driver
+/api/driver
 ```
 
 **Data constraints**
@@ -547,13 +345,15 @@ POST: /driver/:hash/assess      // 給予driver評價
 
 ```json
 [{
-  "driverName": "毛小聖",
+  "method": "getAllDriverInformation",
+  "driverName": "王大陸",
   "creadit": 5,
   "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
   "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
 
 },{
-  "driverName": "毛二聖",
+  "method": "getAllDriverInformation",
+  "driverName": "王二陸",
   "creadit": 10,
   "driverAddress": "0x85cbae24f7ebd6537128f5d51f29c3d60dea8e07",
   "mobileAddress": "0x149da1ec1128b906947416cbb34aa778dfa15e56c",
@@ -594,7 +394,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 ## # 列出該hash的司機資訊.
 
 
-**URL** : `/driver/:hash`
+**URL** : `/api/driver/:hash`
 
 **Method** : `GET`
 
@@ -611,7 +411,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 **URL example**:
 
 ```
-/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81
+/api/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81
 ```
 
 **Data constraints**
@@ -672,7 +472,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 ---
 ## # 給予司機評價.
 
-**URL** : `/driver/:hash/assess`
+**URL** : `/api/driver/:hash/credit`
 
 **Method** : `POST`
 
@@ -690,7 +490,7 @@ POST: /driver/:hash/assess      // 給予driver評價
 **URL example**:
 
 ```
-/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81/assess
+/api/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81/assess
 ```
 
 **Data constraints**
