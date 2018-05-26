@@ -4,22 +4,19 @@ import web3 from '../test';
 
 import * as driver from '../action/driver';
 
-/* contract address */
-let contractAddress = require('../data/contract');
-/* contrac abi */
-let driverAbi = require('../abi/Driver.json');
-
 let driverContract;
 
 apiRouter.get('/:hash', async function (req, res) {
   try {
     var driverAddress = req.params.hash;
-    var driverName = "Testing";
-    var credit = 10;
+    var driverName = 'William';
+    var credit = 1234;
+    
+    console.log("get set driver api");
 
-    var result = driver.setDriver(driverAddress, driverName, credit);
+    var result = driver.setDriverInformation(driverAddress, driverName, credit);
     console.log(result);
-
+    res.send(result);
   } catch (e) {
     res.status(404).send({
       message: 'Not Found'

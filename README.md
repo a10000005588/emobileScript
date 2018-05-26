@@ -434,7 +434,7 @@ POST: /api/driver/:hash/credit      // 給予driver評價
   "creadit": 5,
   "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
   "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
-
+  "phone": "09-12345678"
 }
 ```
 
@@ -515,6 +515,8 @@ POST: /api/driver/:hash/credit      // 給予driver評價
     "creadit": 10,
     "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
     "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
+    "phone": "09-12345678"
+
 }
 ```
 

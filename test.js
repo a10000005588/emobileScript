@@ -9,7 +9,7 @@ let cors = require('cors');
 let bodyParser = require('body-parser');
 let app = express();
 let server = require('http').createServer(app);
-
+ 
 let apiDriver = require('./route/driver')
 
 app.use(bodyParser.json());
@@ -19,10 +19,9 @@ app.use(cors());
 // define api router 
 let apiRouter = express.Router();
 
-app.use('/driver', apiDriver);
+app.use('/api/driver', apiDriver);
 app.use('', apiRouter);
-
-
+    
 apiRouter.get('/driver/general', async function (req, res) {
   res.send({ message: 'hello world' });
 });
