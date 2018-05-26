@@ -5,7 +5,6 @@ const io = require('socket.io-client');
 const axios = require('axios');
 let env = require('./env');
 let express = require('express');
-let cors = require('cors');
 let bodyParser = require('body-parser');
 let app = express();
 let server = require('http').createServer(app);
@@ -14,7 +13,6 @@ let apiDriver = require('./route/driver')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
 
 // define api router 
 let apiRouter = express.Router();
