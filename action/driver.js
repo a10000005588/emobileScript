@@ -13,7 +13,7 @@ export function setDriverInformation(_driverAddress, _driverName, _credit) {
   let block = web3.eth.getBlock("latest");
   let data = '0x';
   // 取前2-10位（共8位數、省略0x)
-  let method = web3.sha3('setDriverInformation(address,string,uint256)').slice(2,10);
+  let method = web3.sha3('setDriverInformation(address,bytes32,uint256)').slice(2,10);
 
   let driverAddress = _driverAddress;
   let driverName = web3.toHex(_driverName);
@@ -23,7 +23,7 @@ export function setDriverInformation(_driverAddress, _driverName, _credit) {
                 transaction.to64Bytes(driverName.slice(2,)) +
                 transaction.to64Bytes(credit.slice(2,));
   console.log(params);
-  
+
   // 將 data 轉成 heximal格式
   data += method + params;
 
