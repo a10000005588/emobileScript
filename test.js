@@ -12,7 +12,8 @@ let server = require('http').createServer(app);
 let apiDriver = require('./route/driver')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // define api router 
 let apiRouter = express.Router();

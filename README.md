@@ -430,6 +430,7 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 ```json
 {
+  "method": "getDriverInformation",
   "driverName": "毛小聖",
   "creadit": 5,
   "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
@@ -511,6 +512,7 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 ```json
 {
+    "method": "giveCreditForDriver",
     "driverName": "毛小聖",
     "creadit": 10,
     "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
