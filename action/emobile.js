@@ -91,3 +91,70 @@ export function setEmotoInfomation(_emotoAddress, _plate, _driverName, _driverAd
     console.log("caught: ", err);
   });
 }
+
+
+export function getMobileInformation(_emotoAddress) {
+  
+  let block = web3.eth.getBlock("latest");
+  let data = '0x';
+  // 取前2-10位（共8位數、省略0x)
+  let method = web3.sha3('getMobileInformation(address)').slice(2,10);
+  
+  let emotoAddress = _emotoAddress;
+  
+  let params =  transaction.to64Bytes(emotoAddress.slice(2,));
+  console.log(params);
+  
+  
+
+  // 將 data 轉成 heximal格式
+  data += method + params;
+
+  let gasPrice = web3.eth.gasPrice;
+  let gasLimit = 1000000;
+  let value_ = 0x0;
+  let nonce = web3.eth.getTransactionCount(config.account);
+
+  // if gave the wrong address for to... no error pop on the terminal........
+  let txInfo = {
+      // from: config.account,
+      nonce: web3.toHex(nonce),
+      gasPrice: web3.toHex(gasPrice),
+      gasLimit: web3.toHex(gasLimit),
+      to: contractAddress.Emobile,
+      value: '0x00',
+      data: data,
+      chainId: 1
+  }
+  console.log(txInfo);
+  
+  
+  var result = web3.eth.call(txInfo);
+  
+  //切掉前面0x
+  var raw_data = result.slice(2);
+  
+  //plate
+  var data_plate = raw_data.slice(0,64);
+  
+  //driverName
+  var data_name = raw_data.slice(64,128);
+  
+  //driverAddress
+  var data_address = raw_data.slice(128,192);
+  
+  //isLock
+  var data_islock = raw_data.slice(192);
+  
+  var res = {
+    "plate": web3.toAscii("0x" + data_plate),
+	"driverName": web3.toAscii("0x" + data_name),
+	"driverAddress": ("0x" + data_address),
+	"isLock": ("0x" + data_islock)
+  };
+  
+  
+  return res;
+  
+}
+

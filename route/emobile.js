@@ -26,4 +26,20 @@ apiRouter.post('/setEmoto/', async function (req, res) {
   }
 });
 
+apiRouter.get('/:hash/', async function (req, res) {
+  try {
+    var emotoAddress = req.params.hash;
+    
+    console.log("get emoto api");
+	
+    var result = emobile.getMobileInformation(emotoAddress);
+    console.log(result);
+    res.send(result);
+  } catch (e) {
+    res.status(404).send({
+      message: 'Not Found'
+    });
+  }
+});
+
 module.exports = apiRouter;
