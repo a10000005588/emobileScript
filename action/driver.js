@@ -84,14 +84,19 @@ export function getDriverInformation(_driverAddress) {
       data: data,
       chainId: 1
   }
-  console.log(txInfo);
 
-  transaction.sendTransaction(txInfo).then(function(txhash) {
-    console.log('====getDriver hash====');
-    console.log(txhash);
-  }).catch(err => {
-    console.log("caught: ", err);
-  });
+  var result = web3.eth.call(txInfo).slice(2,);
+  var credit = result.slice(0,64);
+  var driverName = result.slice(64,128);
+
+  console.log(web3.toAscii(driverName));
+
+  var driverInfo = {
+    "credit": credit, // raw data
+    "driverName": web3.toAscii(driverName)
+  }
+
+  return driverInfo;
 }
 
 export function giveCreditForDriver(_driverAddress, _credit) {
