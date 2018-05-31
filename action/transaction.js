@@ -9,6 +9,7 @@ export function sendTransaction(txn) {
       tx.sign(privateKey);
       let serializedTx = tx.serialize().toString('hex');
       let rawTxn = '0x'+ serializedTx;
+	  
       let txHash = web3.eth.sendRawTransaction(rawTxn, function (err, hash) {
           if (err) {
               console.log(err);

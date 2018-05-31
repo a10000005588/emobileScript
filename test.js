@@ -9,7 +9,8 @@ let bodyParser = require('body-parser');
 let app = express();
 let server = require('http').createServer(app);
  
-let apiDriver = require('./route/driver')
+let apiDriver = require('./route/driver');
+let apiEmoto = require('./route/emobile')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let apiRouter = express.Router();
 
 app.use('/api/driver', apiDriver);
+app.use('/api/emoto', apiEmoto);
 app.use('', apiRouter);
     
 apiRouter.get('/driver/general', async function (req, res) {

@@ -29,6 +29,28 @@
       "type": "function"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "driver",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "driverName",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "credit",
+          "type": "uint256"
+        }
+      ],
+      "name": "DriverInformation",
+      "type": "event"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -94,6 +116,24 @@
       ],
       "payable": false,
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "test",
+      "outputs": [
+        {
+          "name": "myNumber",
+          "type": "uint256"
+        },
+        {
+          "name": "myString",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
       "type": "function"
     }
   ]
