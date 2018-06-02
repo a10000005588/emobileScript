@@ -41,7 +41,8 @@ data collection for emobiles.
 ```
 GET:  /api/emoto                                  // 列出所有 emoto 資訊
 GET:  /api/emoto/:hash                            // 以 hash 取得 emoto 資訊
-GET:  /api/emoto/:hash/user/:userHash             // 計算某台電動車行駛費用
+GET:  /api/emoto/:hash/calculateServiceFee        // 計算用戶搭車行駛費用
+
 ```
 
 ### Driver API
@@ -54,13 +55,15 @@ data collection for emobiles.
 ```
 GET:  /api/driver                   // 列出所有driver資訊
 GET:  /api/driver/:hash             // 列出對應hash的driver資訊
-POST: /api/driver/:hash/credit      // 給予driver評價
+GET:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予driver評價
 ```
 ---
 
 # # Emobile API
 
-## # 列出所有 emoto 資訊.
+## # getAllEmoto
+
+列出所有 emoto 資訊.
 
 **URL** : `/api/emoto`
 
@@ -138,7 +141,9 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 ```
 ---
-## # 以 hash 取得 emobile 資訊.
+## # getEmoto 
+
+以 hash 取得 emobile 資訊.
 
 **URL** : `/api/emoto/:hash`
 
@@ -218,9 +223,11 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 ```
 ---
-## # 計算某台電動車行駛費用
+## # calculateServiceFee 
 
-**URL** : `/api/emoto/:hash/user/:userHash`
+計算用戶搭車行駛費用
+
+**URL** : `/api/emoto/:hash/caculateFee`
 
 **Method** : `GET`
 
@@ -237,24 +244,32 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 **URL example**:
 
 ```
-/api/emoto/0x83af6976832d90e5693a9b5a7b29fac4a28de801/user/0x77af5576832d90e5693a9b5a7b29fac4a28de111
+/api/emoto/0x83af6976832d90e5693a9b5a7b29fac4a28de801/calcuateServiceFee
 ```
 
 **Data constraints**
 
 ```json
 {
-    "createDate": "2018-01-01",
-    "longitude": 121.525, //經度
-    "latitude": 25.0392, //緯度
-    "distance": 1.234, //本次搭乘里程數
+    "emotoType": string,
+    "createDate": date,
+    "longitude": float, //經度
+    "latitude": float, //緯度
+    "distance": float, // km
 }
 ```
 
 **Data example**: 
 
-(None)
-
+```json
+{
+    "emotoType": "gogoro2",
+    "createDate": "2018-01-01",
+    "longitude": 121.525, //經度
+    "latitude": 25.0392, //緯度
+    "distance": 1.5 , //本次搭乘里程數
+}
+```
 ### Success Response
 
 **Condition** : If everything is OK and server available.
@@ -267,9 +282,9 @@ POST: /api/driver/:hash/credit      // 給予driver評價
     "emotoAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
     "plate": "ACX-9999",
     "driverName": "王小明",
-    "driverAddress": "0x83af6976832d90e5693a9b5a7b29fac4a28de801",
- ** "mileage": 21.234  (km),
-    "fee": 10 (ether)
+    "driverAddress": "0x66ef6976832d90e5693a9b5a7b29fac4a28de801",
+ ** "mileage": 1.5  (km),
+    "fee": 50 , (Milliether = 0.001 ether) 
 }
 ```
 
@@ -284,7 +299,7 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 {
     "result": false,
-    "message": "",
+    "message": "something wrong",
 }
 
 ```
@@ -309,7 +324,9 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 # # Driver API
 
-## # 列出所有司機資訊.
+## # getAllDriver 
+
+列出所有司機資訊.
 
 **URL** : `/api/driver`
 
@@ -391,7 +408,9 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 ```
 ---
-## # 列出該hash的司機資訊.
+## # getDriver 
+
+列出該hash的司機資訊.
 
 
 **URL** : `/api/driver/:hash`
@@ -471,11 +490,13 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 ```
 
 ---
-## # 給予司機評價.
+## # createPayment
 
-**URL** : `/api/driver/:hash/credit`
+給予費用並且給予driver評價.
 
-**Method** : `POST`
+**URL** : `/api/driver/:hash/payment/user/:userHash`
+
+**Method** : `GET`
 
 **Auth required** : NO
 
@@ -491,18 +512,29 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 **URL example**:
 
 ```
-/api/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81/assess
+/api/driver/0xc159e38b17d5aa46dc7fc61778222a8c485f6b81/payment/user/0x4444e38b17d5aa46dc7fc61778222a8c485f6b81
 ```
 
 **Data constraints**
-```
+
+```json
 {
-    "credit" : 5
+    "driverName": string,
+    "userName": string,
+    "fee": float,
+    "credit" : int
 }
 ```
 **Data example**: 
 
-(None)
+```json
+{
+    "driverName": "王大陸",
+    "userName": "王小明",
+    "fee": 0.15,
+    "credit" : 5
+}
+```
 
 ### Success Response
 
@@ -512,13 +544,13 @@ POST: /api/driver/:hash/credit      // 給予driver評價
 
 ```json
 {
-    "method": "giveCreditForDriver",
-    "driverName": "毛小聖",
-    "creadit": 10,
+    "method": "createPayment",
+    "driverName": "王大陸",
+    "userName": "王小明",
+    "creadit": 4.3,
     "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
     "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
-    "phone": "09-12345678"
-
+    "transactionReceipt": "0x4bc88c0931fcad30620ced2b049bb3a682991faa62b4e30f32668dc3501c2eeb"
 }
 ```
 
