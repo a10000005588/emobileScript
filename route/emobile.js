@@ -4,15 +4,12 @@ import web3 from '../test';
 
 import * as emobile from '../action/emobile';
 
-//好像沒用到的變數
-let driverContract;
-
 apiRouter.post('/setEmoto/', async function (req, res) {
   try {
     var emotoAddress = req.body.emoto;
     var plate = req.body.plate;
     var driverName = req.body.name;
-	var driverAddress = req.body.driver;
+  	var driverAddress = req.body.driver;
     
     console.log("set emoto api");
 	

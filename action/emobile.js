@@ -57,7 +57,7 @@ export function setEmotoInfomation(_emotoAddress, _plate, _driverName, _driverAd
 
   let params =  transaction.to64Bytes(emotoAddress.slice(2,)) +
                 transaction.to64Bytes(plate.slice(2,)) +
-				transaction.to64Bytes(driverName.slice(2,)) +
+				        transaction.to64Bytes(driverName.slice(2,)) +
                 transaction.to64Bytes(driverAddress.slice(2,));
   console.log(params);
   
