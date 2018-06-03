@@ -55,7 +55,7 @@ data collection for emobiles.
 ```
 GET:  /api/driver                   // 列出所有driver資訊
 GET:  /api/driver/:hash             // 列出對應hash的driver資訊
-GET:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予driver評價
+POST:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予driver評價
 ```
 ---
 
@@ -496,7 +496,7 @@ GET:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予dr
 
 **URL** : `/api/driver/:hash/payment/user/:userHash`
 
-**Method** : `GET`
+**Method** : `POST`
 
 **Auth required** : NO
 
@@ -525,12 +525,14 @@ GET:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予dr
     "credit" : int
 }
 ```
-**Data example**: 
+**Data example**:
 
 ```json
 {
+    "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
     "driverName": "王大陸",
     "userName": "王小明",
+    "userAddress": "0x0a68808f5803882e69e66804c75172c873a09f24",
     "fee": 0.15,
     "credit" : 5
 }
@@ -547,7 +549,8 @@ GET:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予dr
     "method": "createPayment",
     "driverName": "王大陸",
     "userName": "王小明",
-    "creadit": 4.3,
+    "userAddress": "0x0a68808f5803882e69e66804c75172c873a09f24",
+    "credit": 4.3,
     "driverAddress": "0xc159e38b17d5aa46dc7fc61778222a8c485f6b81",
     "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
     "transactionReceipt": "0x4bc88c0931fcad30620ced2b049bb3a682991faa62b4e30f32668dc3501c2eeb"
