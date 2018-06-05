@@ -23,7 +23,29 @@ apiRouter.post('/setDriver/:hash', async function (req, res) {
   }
 });
 
-module.exports = apiRouter;
+
+apiRouter.get('/', async function (req, res) {
+  try {
+    console.log("getAllDriver API");
+    var onChainResponse = await driver.getAllDriverInformation();
+
+    var information = {
+      "method": "getDriverInformation",
+      "driverName": onChainResponse.driverName,
+      "credit": onChainResponse.credit,
+      "driverAddress": onChainResponse.driverAddress,
+      "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
+      "phone": "09-12345678",
+      "count": onChainResponse.count
+    }
+
+    res.send(information);
+  } catch (e) {
+    res.status(404).send({
+      message: 'Not Found'
+    });
+  }
+});
 
 apiRouter.get('/:hash', async function (req, res) {
   try {
@@ -53,7 +75,7 @@ apiRouter.post('/:hash/credit', async function (req, res) {
     console.log("credit api");
     var driverAddress = req.params.hash;
     var credit = req.body.credit;
-
+  
     var result = driver.giveCreditForDriver(driverAddress,credit);
     console.log(result);
     res.send(result);
@@ -85,3 +107,5 @@ apiRouter.post('/:hash/credit', async function (req, res) {
 //         }
 //     }
 // );
+
+module.exports = apiRouter;

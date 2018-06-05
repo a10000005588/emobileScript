@@ -12,12 +12,20 @@
       "name": "driversStruct",
       "outputs": [
         {
+          "name": "driver",
+          "type": "address"
+        },
+        {
           "name": "credit",
           "type": "uint256"
         },
         {
           "name": "driverName",
           "type": "bytes32"
+        },
+        {
+          "name": "count",
+          "type": "uint256"
         },
         {
           "name": "isStore",
@@ -44,6 +52,11 @@
         {
           "indexed": false,
           "name": "credit",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "count",
           "type": "uint256"
         }
       ],
@@ -84,11 +97,49 @@
       "outputs": [
         {
           "name": "",
+          "type": "bytes32"
+        },
+        {
+          "name": "",
           "type": "uint256"
         },
         {
           "name": "",
-          "type": "bytes32"
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAllDriverInformation",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "",
+          "type": "uint256[]"
+        },
+        {
+          "name": "",
+          "type": "uint256[]"
+        },
+        {
+          "name": "",
+          "type": "address[]"
         }
       ],
       "payable": false,
@@ -112,6 +163,14 @@
         {
           "name": "",
           "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "address"
         }
       ],
       "payable": false,
