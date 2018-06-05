@@ -4,6 +4,7 @@ var request = require('request');
 import web3 from '../test';
 
 import * as driver from '../action/driver';
+import { on } from 'cluster';
 
 let driverContract;
 
@@ -28,18 +29,24 @@ apiRouter.get('/', async function (req, res) {
   try {
     console.log("getAllDriver API");
     var onChainResponse = await driver.getAllDriverInformation();
+    
+    var data = [];
+    
+    for(var i=0; i<onChainResponse.length; i++) {
+      var information = {
+        "method": "getDriverInformation",
+        "driverName": onChainResponse[i].driverName,
+        "credit": onChainResponse[i].credit,
+        "driverAddress": onChainResponse[i].driverAddress,
+        "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
+        "phone": "09-12345678",
+        "count": onChainResponse[i].count
+      }
+      data.push(information);
+    }    
 
-    var information = {
-      "method": "getDriverInformation",
-      "driverName": onChainResponse.driverName,
-      "credit": onChainResponse.credit,
-      "driverAddress": onChainResponse.driverAddress,
-      "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
-      "phone": "09-12345678",
-      "count": onChainResponse.count
-    }
-
-    res.send(information);
+    res.send(data);
+    
   } catch (e) {
     res.status(404).send({
       message: 'Not Found'

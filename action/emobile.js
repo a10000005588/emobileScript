@@ -105,8 +105,6 @@ export function getMobileInformation(_emotoAddress) {
   let params =  transaction.to64Bytes(emotoAddress.slice(2,));
   console.log(params);
   
-  
-
   // 將 data 轉成 heximal格式
   data += method + params;
 

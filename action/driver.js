@@ -221,31 +221,19 @@ export function getAllDriverInformation() {
   }
   console.log(driverAddressCollection);
 
+  var driverDataCollection = []
+  for(var i=0; i<driverDataLength; i++) {
+    var information = {
+      "driverName": driverNameCollection[i],
+      "credit": creditCollection[i],
+      "driverAddress": driverAddressCollection[i],
+      "count": countCollection[i]
+    };
+    
+    driverDataCollection.push(information);
+  }
 
-
-  // var driverName = result.slice(0,64);
-  // var credit = result.slice(64,128);
-  // var count = result.slice(128,192);
-
-  // driverName = web3.toAscii(driverName);
-  // driverName = driverName.replace(/\u([0-9]|[a-fA-F])/g,'');
-
-  // credit = credit.replace(/^0+/, '');
-  // count = count.replace(/^0+/, '');
-
-  // credit = parseInt(credit, 16);
-  // count = parseInt(count, 16);
-
-  // credit = credit / count;
-  // credit = Math.round(credit*10)/ 10;
-
-  // var driverInfo = {
-  //   "driverName": driverName,
-  //   "credit": credit,
-  //   "count": count
-  // }
-
-  return 0;
+  return driverDataCollection;
 }
 
 export function giveCreditForDriver(_driverAddress, _credit) {
