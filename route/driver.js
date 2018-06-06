@@ -80,21 +80,6 @@ apiRouter.get('/:hash', async function (req, res) {
   }
 });
 
-apiRouter.post('/:hash/credit', async function (req, res) {
-  try {
-    console.log("credit api");
-    var driverAddress = req.params.hash;
-    var credit = req.body.credit;
-    var result = driver.giveCreditForDriver(driverAddress,credit);
-    console.log(result);
-    res.send(result);
-  } catch (e) {
-    res.status(404).send({
-      message: 'Not Found'
-    });
-  }
-});
-
 apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
   try {
     console.log("create payment api");
@@ -110,7 +95,9 @@ apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
     
     await emoto.createPayment(request.credit, request.driverAddress, request.fee).then(function(txHash) {
       console.log("route api callback");
-  
+      
+      var avgCredit = req.body.credit / req.body.count;
+
       var response = {
         "method": "createPayment",
         "driverName": request.driverName,

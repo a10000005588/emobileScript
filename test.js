@@ -3,15 +3,17 @@ const ethTx = require('ethereumjs-tx');
 const keythereum = require("keythereum");
 const io = require('socket.io-client');
 const axios = require('axios');
+const cors = require('cors');
+
 let env = require('./env');
 let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
 let server = require('http').createServer(app);
- 
 let apiDriver = require('./route/driver');
 let apiEmoto = require('./route/emoto')
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
