@@ -226,10 +226,11 @@ POST:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予d
 ## # calculateServiceFee 
 
 計算用戶搭車行駛費用
+assume 1 km per 0.01 ether.
 
 **URL** : `/api/emoto/:hash/caculateFee`
 
-**Method** : `GET`
+**Method** : `POST`
 
 **Auth required** : NO
 
@@ -284,7 +285,7 @@ POST:  /api/driver/:hash/payment/user/:userHash     // 給予費用並且給予d
     "driverName": "王小明",
     "driverAddress": "0x66ef6976832d90e5693a9b5a7b29fac4a28de801",
  ** "mileage": 1.5  (km),
-    "fee": 50 , (Milliether = 0.001 ether) 
+    "fee": 0.05 , (ether)
 }
 ```
 

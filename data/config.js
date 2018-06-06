@@ -1,7 +1,7 @@
 /* set the default accounts */
 module.exports = {
-    account: '0xcbc9491eb3d99d34213a9dd847276e0fd8bf355c',
-    myPrivateKey: 'cfeef1395f2c3c4faafd817d133daf8baafc7c718ae8814628b1b8117feb9240',
+    account: '0xea92958858561eaf603b5a1d0f91f7ecca7d3674',
+    myPrivateKey: 'c09a5193de2b5095697285631d0e687d8de8103f10f36c147919954cad371d16',
 }
 
 

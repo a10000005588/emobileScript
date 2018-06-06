@@ -1,5 +1,5 @@
 
 module.exports = {
-    Emobile : "0x24487af1aa2106f86186260fef938202d4a5845b",
-    Driver: "0xb0053b95ade277c80c8cf178f4add339a51373bc",
+    Emoto : "0x8146b677b36f3dbede6ca3edf7d5196c71cd7300",
+    Driver: "0x18f7d2a05babe310afc5048fcb102c3cb27b87b7",
 }

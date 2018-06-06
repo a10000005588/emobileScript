@@ -10,7 +10,7 @@ let app = express();
 let server = require('http').createServer(app);
  
 let apiDriver = require('./route/driver');
-let apiEmoto = require('./route/emobile')
+let apiEmoto = require('./route/emoto')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,14 +29,14 @@ apiRouter.get('/driver/general', async function (req, res) {
 
 server.listen(env.port, async function () {
     console.log(`App listening on port: ${env.port}`);
-    console.log(`API prefix: `);
+    console.log(`API prefix: /api/ `);
 });
 
 import * as transaction from './action/transaction';
-import * as emobile from './action/emobile';
+import * as emobile from './action/emoto';
 
 /* contrac abi */
-let emobileAbi = require('./abi/Emobile.json');
+let emobileAbi = require('./abi/Emoto.json');
 /* config info */
 let config = require('./data/config.js');
 

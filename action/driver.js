@@ -229,7 +229,13 @@ export function getAllDriverInformation() {
       "driverAddress": driverAddressCollection[i],
       "count": countCollection[i]
     };
-    
+
+    if(countCollection[i] != 0) {
+      var avgCredit = creditCollection[i] / countCollection[i];
+      avgCredit = Math.round(avgCredit*10)/ 10;
+      information.credit = avgCredit;
+    }     
+
     driverDataCollection.push(information);
   }
 

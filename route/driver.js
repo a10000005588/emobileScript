@@ -3,7 +3,10 @@ var apiRouter = express.Router();
 var request = require('request');
 import web3 from '../test';
 
+import * as config from '../data/config.js';
 import * as driver from '../action/driver';
+import * as emoto from '../action/emoto';
+
 import { on } from 'cluster';
 
 let driverContract;
@@ -46,7 +49,7 @@ apiRouter.get('/', async function (req, res) {
     }    
 
     res.send(data);
-    
+
   } catch (e) {
     res.status(404).send({
       message: 'Not Found'
@@ -82,10 +85,47 @@ apiRouter.post('/:hash/credit', async function (req, res) {
     console.log("credit api");
     var driverAddress = req.params.hash;
     var credit = req.body.credit;
-  
     var result = driver.giveCreditForDriver(driverAddress,credit);
     console.log(result);
     res.send(result);
+  } catch (e) {
+    res.status(404).send({
+      message: 'Not Found'
+    });
+  }
+});
+
+apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
+  try {
+    console.log("create payment api");
+
+    var request = {
+      "driverAddress": req.params.hash,
+      "driverName": req.body.driverName,
+      "userAddress": config.account,
+      "userName": req.body.userName,
+      "fee": req.body.fee,
+      "credit": req.body.credit
+    }
+    
+    await emoto.createPayment(request.credit, request.driverAddress, request.fee).then(function(txHash) {
+      console.log("route api callback");
+  
+      var response = {
+        "method": "createPayment",
+        "driverName": request.driverName,
+        "userName": req.body.userName,
+        "userAddress": config.account,
+        "credit": req.body.credit,
+        "driverAddress": req.body.driverAddress,
+        "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
+        "transactionReceipt": txHash
+      }
+      res.send(response);
+    }).catch(err => {
+      console.log("caught: ", err);
+    });
+    
   } catch (e) {
     res.status(404).send({
       message: 'Not Found'

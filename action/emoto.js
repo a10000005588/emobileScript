@@ -77,7 +77,7 @@ export function setEmotoInfomation(_emotoAddress, _plate, _driverName, _driverAd
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
       gasLimit: web3.toHex(gasLimit),
-      to: contractAddress.Emobile,
+      to: contractAddress.Emoto,
       value: '0x00',
       data: data,
       chainId: 1
@@ -91,7 +91,6 @@ export function setEmotoInfomation(_emotoAddress, _plate, _driverName, _driverAd
     console.log("caught: ", err);
   });
 }
-
 
 export function getMobileInformation(_emotoAddress) {
   
@@ -119,7 +118,7 @@ export function getMobileInformation(_emotoAddress) {
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
       gasLimit: web3.toHex(gasLimit),
-      to: contractAddress.Emobile,
+      to: contractAddress.Emoto,
       value: '0x00',
       data: data,
       chainId: 1
@@ -146,9 +145,9 @@ export function getMobileInformation(_emotoAddress) {
   
   var res = {
     "plate": web3.toAscii("0x" + data_plate),
-	"driverName": web3.toAscii("0x" + data_name),
-	"driverAddress": ("0x" + data_address),
-	"isLock": ("0x" + data_islock)
+    "driverName": web3.toAscii("0x" + data_name),
+    "driverAddress": ("0x" + data_address),
+    "isLock": ("0x" + data_islock)
   };
   
   
@@ -156,3 +155,54 @@ export function getMobileInformation(_emotoAddress) {
   
 }
 
+
+export async function createPayment(_credit, _driverAddress, _fee) {
+  
+  let block = web3.eth.getBlock("latest");
+  let data = '0x';
+  // 取前2-10位（共8位數、省略0x)
+  let method = web3.sha3('createPayment(uint256,address)').slice(2,10);
+
+  let driverAddress = _driverAddress;
+  let credit = web3.toHex(_credit);
+
+  let params = transaction.to64Bytes(credit.slice(2,)) +
+               transaction.to64Bytes(driverAddress.slice(2,));
+                
+  _fee = _fee * (10 ** 18);
+  let fee = web3.toHex(_fee);
+  // 將 data 轉成 heximal格式
+  data += method + params;
+
+  let gasPrice = web3.eth.gasPrice;
+  let gasLimit = 1000000;
+  let value_ = fee;
+  let nonce = web3.eth.getTransactionCount(config.account);
+
+  let txInfo = {
+      from: config.account,
+      nonce: web3.toHex(nonce),
+      gasPrice: web3.toHex(gasPrice),
+      gasLimit: web3.toHex(gasLimit),
+      to: contractAddress.Emoto,
+      value: value_,
+      data: data,
+      chainId: 1
+  }
+  console.log(txInfo);
+
+  return new Promise(function(resolve, reject){
+    transaction.sendTransaction(txInfo).then(function(txhash) {
+      console.log('====createPayment hash====');
+      console.log(txhash);
+
+      console.log('====get updated driverInforamtion');
+      
+
+   
+      resolve(txhash);
+    }).catch(err => {
+      console.log("caught: ", err);
+    });
+  })  
+}
