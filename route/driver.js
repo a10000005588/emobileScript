@@ -246,7 +246,8 @@ apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
         "driverAddress": req.body.driverAddress,
         "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
 		"comment": req.body.comment,
-        "transactionReceipt": txHash
+        "transactionReceipt": txHash,
+		"fee": req.body.fee
       }
       res.send(response);
     }).catch(err => {
