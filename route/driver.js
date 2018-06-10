@@ -97,6 +97,7 @@ apiRouter.get('/', async function (req, res) {
 							"driverAddress": onChainResponse[idx].driverAddress,
 							"mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
 							"phone": db_data.data[0].phone,
+							"plate": db_data.data[0].plate,
 							"count": onChainResponse[idx].count
 						}
 					}
@@ -111,6 +112,7 @@ apiRouter.get('/', async function (req, res) {
 							"driverAddress": onChainResponse[idx].driverAddress,
 							"mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
 							"phone": "09-12345678",
+							"plate": "ABC-0000",
 							"count": onChainResponse[idx].count
 						}
 					}
@@ -133,6 +135,10 @@ apiRouter.get('/', async function (req, res) {
 		
     }
 	
+	if(onChainResponse.length == 0)
+	{
+		res.send(data);
+	}
 	
 	
   } catch (e) {
@@ -191,7 +197,7 @@ apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
   try {
     console.log("create payment api");
 
-    var request = {
+    var request2 = {
       "driverAddress": req.params.hash,
       "driverName": req.body.driverName,
       "userAddress": config.account,
@@ -199,20 +205,47 @@ apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
       "fee": req.body.fee,
       "credit": req.body.credit
     }
+	
+	//資料庫新增交易
+	request.post('http://140.113.63.172:5678/emobile/api.php',
+		{
+			form:
+			{
+				"method": "new_travel",
+				"longitude": 121.5,
+				"latitude": 25.0,
+				"distance": 1.234,
+				"user": config.account,
+				"driver": req.params.hash,
+				"contract": "0x0100000000000000000000000000000000000001",
+				"credit": req.body.credit,
+				"comment": req.body.comment
+			}
+		},
+		function (error, response, body)
+		{
+			if(!error && response.statusCode == 200)
+			{
+			   console.log(body);
+			}
+		}
+	);
+	
     
-    await emoto.createPayment(request.credit, request.driverAddress, request.fee).then(function(txHash) {
+    await emoto.createPayment(request2.credit, request2.driverAddress, request2.fee).then(function(txHash) {
       console.log("route api callback");
       
       var avgCredit = req.body.credit / req.body.count;
 
       var response = {
         "method": "createPayment",
-        "driverName": request.driverName,
+        "driverName": request2.driverName,
         "userName": req.body.userName,
         "userAddress": config.account,
         "credit": req.body.credit,
         "driverAddress": req.body.driverAddress,
         "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
+		"comment": req.body.comment,
         "transactionReceipt": txHash
       }
       res.send(response);
@@ -226,6 +259,49 @@ apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
     });
   }
 });
+
+
+
+
+apiRouter.get('/comment/:hash', async function (req, res) {
+  try {
+    var driverAddress = req.params.hash;
+    
+	
+	//資料庫拿到單一司機
+	request.post('http://140.113.63.172:5678/emobile/api.php',
+		{
+			form:
+			{
+				"method": 'get_driver_travel', 
+				"driver": driverAddress
+			}
+		},
+		function (error, response, body)
+		{
+			if(!error && response.statusCode == 200)
+			{
+				
+				var db_data = JSON.parse(body);
+				
+				res.send(db_data);
+			}
+		}
+	);
+	
+	
+  } catch (e) {
+    res.status(404).send({
+      message: 'Not Found'
+    });
+  }
+});
+
+
+
+
+
+
 
 
 module.exports = apiRouter;
