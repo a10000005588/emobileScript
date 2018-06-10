@@ -25,7 +25,7 @@ export function getProfitValue() {
   let nounce = web3.eth.getTransactionCount(config.account);
   // 透過我自己的帳戶，用data和Emobile合約做溝通
   let txInfo = {
-      // from: config.account,
+      from: config.account,
       nonce: web3.toHex(nounce),
       gasPrice: web3.toHex(gasPrice),
       gasLimit: web3.toHex(gasLimit),
@@ -73,7 +73,7 @@ export function setEmotoInfomation(_emotoAddress, _plate, _driverName, _driverAd
 
   // if gave the wrong address for to... no error pop on the terminal........
   let txInfo = {
-      // from: config.account,
+      from: config.account,
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
       gasLimit: web3.toHex(gasLimit),
@@ -114,7 +114,7 @@ export function getMobileInformation(_emotoAddress) {
 
   // if gave the wrong address for to... no error pop on the terminal........
   let txInfo = {
-      // from: config.account,
+      from: config.account,
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
       gasLimit: web3.toHex(gasLimit),
