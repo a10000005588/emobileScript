@@ -33,6 +33,7 @@ export function setDriverInformation(_driverAddress, _driverName, _credit) {
 
   // if gave the wrong address for to... no error pop on the terminal........
   let txInfo = {
+      chainId: "0x4",
       from: config.account,
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
@@ -73,6 +74,7 @@ export function getDriverInformation(_driverAddress) {
 
   // if gave the wrong address for to... no error pop on the terminal........
   let txInfo = {
+      chainId: "0x4",
       from: config.account,
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
@@ -134,6 +136,7 @@ export function getAllDriverInformation() {
 
   // if gave the wrong address for to... no error pop on the terminal........
   let txInfo = {
+      chainId: "0x4",
       from: config.account,
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
@@ -265,6 +268,7 @@ export function giveCreditForDriver(_driverAddress, _credit) {
 
   // if gave the wrong address for to... no error pop on the terminal........
   let txInfo = {
+      chainId: "0x4",
       from: config.account,
       nonce: web3.toHex(nonce),
       gasPrice: web3.toHex(gasPrice),
