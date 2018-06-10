@@ -34,7 +34,6 @@ export function getProfitValue() {
       // 如果沒有要打ehter, 直接代0x0
       value: value_,
       data: data,
-      chainId: 1
   }
   transaction.sendTransaction(txInfo).then(function(txhash) {
     console.log('====userTakeOrder hash====');
@@ -82,7 +81,6 @@ export function setEmotoInfomation(_emotoAddress, _plate, _driverName, _driverAd
       to: contractAddress.Emoto,
       value: '0x00',
       data: data,
-      chainId: 1
   }
   console.log(txInfo);
 
@@ -124,7 +122,6 @@ export function getMobileInformation(_emotoAddress) {
       to: contractAddress.Emoto,
       value: '0x00',
       data: data,
-      chainId: 1
   }
   console.log(txInfo);
   
@@ -191,7 +188,6 @@ export async function createPayment(_credit, _driverAddress, _fee) {
       to: contractAddress.Emoto,
       value: value_,
       data: data,
-      chainId: 1
   }
   console.log(txInfo);
 

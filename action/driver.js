@@ -41,7 +41,6 @@ export function setDriverInformation(_driverAddress, _driverName, _credit) {
       to: contractAddress.Driver,
       value: value_,
       data: data,
-      chainId: 1
   }
 
   console.log(txInfo);
@@ -82,7 +81,6 @@ export function getDriverInformation(_driverAddress) {
       to: contractAddress.Driver,
       value: value_,
       data: data,
-      chainId: 1
   }
 
   var result = web3.eth.call(txInfo).slice(2,);
@@ -144,7 +142,6 @@ export function getAllDriverInformation() {
       to: contractAddress.Driver,
       value: value_,
       data: data,
-      chainId: 1
   }
   var result = web3.eth.call(txInfo).slice(2,);
 
@@ -276,7 +273,6 @@ export function giveCreditForDriver(_driverAddress, _credit) {
       to: contractAddress.Driver,
       value: value_,
       data: data,
-      chainId: 1
   }
   console.log(txInfo);
 
