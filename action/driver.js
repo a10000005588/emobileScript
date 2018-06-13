@@ -104,7 +104,7 @@ export function getDriverInformation(_driverAddress) {
   count = parseInt(count, 16);
 
   if(count != 0) {
-    credit = credit / count;
+    credit = credit / (count+1);
     credit = Math.round(credit*10)/ 10;
   }
   
@@ -231,7 +231,7 @@ export function getAllDriverInformation() {
     };
 
     if(countCollection[i] != 0) {
-      var avgCredit = creditCollection[i] / countCollection[i];
+      var avgCredit = creditCollection[i] / (countCollection[i]+1);
       avgCredit = Math.round(avgCredit*10)/ 10;
       information.credit = avgCredit;
     }     

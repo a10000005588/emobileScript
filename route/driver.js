@@ -15,7 +15,7 @@ apiRouter.post('/setDriver/:hash', async function (req, res) {
   try {
     var driverAddress = req.params.hash;
     var driverName = req.body.driverName;
-    var credit = 0;
+    var credit = req.body.credit;
     
 	//資料庫新增司機
 	request.post('http://140.113.63.172:5678/emobile/driver.php',
@@ -245,9 +245,9 @@ apiRouter.post('/:hash/payment/user/:userHash', async function (req, res) {
         "credit": req.body.credit,
         "driverAddress": req.body.driverAddress,
         "mobileAddress": "0x149da1ece68b906947416cbb34aa778dfa15e56c",
-		"comment": req.body.comment,
+		    "comment": req.body.comment,
         "transactionReceipt": txHash,
-		"fee": req.body.fee
+		    "fee": req.body.fee
       }
       res.send(response);
     }).catch(err => {
