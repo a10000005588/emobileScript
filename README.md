@@ -26,7 +26,7 @@ It's API spec for emobile web app.
 
 ### Base URL: 
 
-140.113.73.50:3000
+127.0.0.1:3000
 
 
 ## Usage
